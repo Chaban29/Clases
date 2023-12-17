@@ -551,7 +551,7 @@ class Button {
   }
 }
 
-let button = new Button('Hello');
+// let button = new Button('Hello');
 
 let bindContext = button.click.bind(button);
 
@@ -590,3 +590,335 @@ class Clock {
 
 let clock = new Clock({template: 'h:m:s'});
 clock.start();
+
+class User {
+  constructor(name, surname) {
+    this.name = name;
+    this.surname = surname;
+  }
+  get userFullName() {
+    console.log(`${this.name} ${this.surname}`);
+  }
+  userSayHi() {
+    console.log(`${this.name} say Hello!`);
+  }
+}
+
+const user = new User("Roman", "Chaban");
+
+user.userFullName;
+user.userSayHi();
+
+console.log(typeof User);
+console.log(Object.getOwnPropertyNames(User.prototype));
+console.log(User === User.prototype.constructor);
+
+function User(name, surname) {
+  this.name = name;
+  this.surname = surname;
+}
+
+User.prototype.sayHi = function () {
+  return console.log(` User name is: ${this.name} ${this.surname}`);
+};
+
+class User {
+  constructor(name, surname) {
+    this.name = name;
+    this.surname = surname;
+  }
+  sayHi() {
+    return console.log(` User name is: ${this.name} ${this.surname}`);
+  }
+  get userBirthdayDate() {
+    let date = Date.now();
+    console.log(date);
+    let userBirthday = new Date(date) - 2001;
+    return userBirthday;
+  }
+}
+
+const user = new User("Alan", "Smith");
+const secondUser = new User("Jim", "Cerry");
+
+user.sayHi();
+secondUser.sayHi();
+
+let User = class UserSay {
+  sayHi() {
+    alert(UserSay);
+  }
+};
+
+const user = new User();
+
+user.sayHi();
+
+class User {
+  constructor(name) {
+    this._name = name;
+  }
+  ["say" + "Hi"]() {
+    console.log(`${this.name}`);
+  }
+  get name() {
+    console.log(`${this.name}`);
+  }
+  set name(value) {
+    if (value.length < 4) {
+      alert('Your name is really short');
+      return
+    }
+    this._name = value;
+  }
+}
+const user = new User("Roman");
+console.log(user);
+user.name = "";
+console.log(user);
+console.log(User.prototype);
+
+class User {
+  surname = 'Chaban';
+  constructor(name) {
+    this.name = name;
+  }
+  ["user" + "Name"]() {
+    console.log(this.name, this.surname);
+  }
+}
+
+const user = new User('Roman');
+
+user.userName();
+
+class Button {
+  constructor(value) {
+    this.value = value;
+  }
+  click = () => {
+    alert(this.value);
+  }
+}
+
+let button = new Button('Click');
+
+setTimeout(button.click, 1500);
+
+class Animal {
+  constructor(name) {
+    this.name = name;
+    this.speed = 0;
+  }
+  run(speed) {
+    this.speed = speed;
+    console.log(`${this.name} run for speed ${this.speed}.`);
+  }
+  stop() {
+    this.speed = 0;
+    console.log(`${this.speed} stop!`);
+  }
+}
+
+// let animal = new Animal('Rabbit');
+
+animal.run(20);
+
+console.log(Animal.prototype);
+
+class Animal {
+  constructor(name) {
+    this.name = name;
+    this.speed = 0;
+  }
+  run(speed) {
+    this.speed = speed;
+    console.log(`${this.name} run for speed ${this.speed}`);
+  }
+  stop() {
+    this.speed = 0;
+    console.log(`${this.name} stop!`);
+  }
+}
+
+class Rabbit extends Animal {
+  hide() {
+    alert(`${this.name} is hide!`);
+  }
+}
+
+// let rabbit = new Rabbit("Bugs Bunny");
+
+rabbit.run(5);
+
+class Dog extends Animal {
+  legs = 4;
+  hasLegs() {
+    console.log(this.name + " has " + this.legs + " legs");
+  }
+}
+
+const doggy = new Dog("Dicky");
+
+doggy.hasLegs();
+console.log(doggy.name);
+doggy.run(8);
+
+function f(prahse) {
+  return class {
+    sayHi() {console.log(prahse)}
+  }
+}
+class User extends f('Hello') {};
+
+new User().sayHi();
+
+class Animal {
+  constructor(name) {
+    this.name = name;
+    this.speed = 0;
+  }
+  run(speed) {
+    this.speed = speed;
+    return console.log(`${this.name} біжить зі швидкістю ${this.speed}`);
+  }
+  stop() {
+    this.speed = 0;
+    console.log(`${this.name} стоїть.`);
+  }
+}
+
+class Rabbit extends Animal {
+  hide() {
+    return console.log(`${this.name} ховається.`);
+  }
+  stop() {
+    super.stop();
+    this.hide();
+  }
+}
+
+// let rabbit = new Rabbit('Bugs Bunny');
+
+rabbit.run(5);
+rabbit.stop();
+
+class Animal {
+  constructor(name) {
+    this.name = name;
+    this.speed = 0;
+  }
+  run(speed) {
+    this.speed = speed;
+    console.log(`${this.name} run for speed ${this.speed}`);
+  }
+  stop() {
+    this.speed = 0;
+    console.log(`${this.name} stop!`);
+  }
+}
+
+let animal = new Animal("Bugs Bunny");
+
+console.log(Object.getOwnPropertyNames(Animal.prototype));
+
+class Rabbit extends Animal {
+  hide() {
+    alert(`${this.name} hidden!`);
+  }
+}
+
+// let rabbit = new Rabbit("Bugs Bunny");
+
+console.log(Rabbit === Rabbit.prototype.constructor);
+
+console.log(Object.getOwnPropertyNames(Animal.prototype));
+console.log(Object.getOwnPropertyNames(Rabbit.prototype));
+
+function func(phrase) {
+  return class {
+    sayHi() {
+      alert(phrase);
+    }
+  };
+}
+
+class User extends func("Hello") {}
+
+new User().sayHi();
+
+function greet(greeting) {
+  return class {
+    userGreet() {
+      alert(greeting);
+    }
+  };
+}
+
+class Greet extends greet('Hello world!'){};
+
+new Greet().userGreet();
+
+class Animal {
+  constructor(name) {
+    this.speed = 0;
+    this.name = name;
+  }
+  run(speed) {
+    this.speed = speed;
+    console.log(`${this.name} біжить зі швидкістю ${this.speed}`);
+  }
+  stop() {
+    this.speed = 0;
+    console.log(`${this.name} stop!`);
+  }
+}
+
+class Rabbit extends Animal {
+  constructor(name, earLength) {
+    super(name);
+    this.earLength = earLength;
+  }
+  hide() {
+    console.log(`${this.name} is hidden!`);
+  }
+  stop() {
+    super.stop();
+    this.hide();
+  }
+}
+
+let rabbit = new Rabbit('Bugs Bunny', 10);
+
+rabbit.name = 'Rocky';
+
+console.log(rabbit);
+
+class Animal {
+  constructor(name, longEar) {
+    this.speed = 0;
+    this.name = name;
+    this.longEar = longEar;
+  }
+  run(speed) {
+    this.speed = speed;
+    console.log(`${this.name} run for speed ${this.speed}`);
+  }
+  stop() {
+    this.speed = 0;
+    console.log(`${this.name} stop!`);
+  }
+}
+
+class Rabbit extends Animal {
+  hide() {
+    console.log(`${this.name} is hidden!`);
+  }
+  hasLongEar() {
+    console.log(`${this.name} has ${this.longEar}`);
+  }
+}
+
+const rabbit = new Rabbit("Bugs Bunny", ": LongEar");
+
+rabbit.hasLongEar();
